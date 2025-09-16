@@ -36,7 +36,7 @@ class ExaoneService:
                     filename = f'문서_{i+1}'
                     content = str(doc)
 
-                context += f"\n\n[문서 {i + 1}: {filename}]\n"
+                context += f"\n\n[{filename}]\n"
                 context += content
                 referenced_files.add(filename)
 
@@ -44,18 +44,19 @@ class ExaoneService:
             prompt = f"""다음 문서들을 참조하여 사용자의 질문에 대해 정확하고 도움이 되는 답변을 해주세요.
 
             질문: {query}
-            
+
             참조 문서들:
             {context}
-            
+
             답변 요구사항:
             1. 질문에 직접적으로 관련된 정보를 우선적으로 활용해주세요
             2. 한국어로 자연스럽게 답변해주세요
             3. 구체적인 정보와 예시를 포함해주세요
-            4. 답변 끝에 참조한 문서 목록을 포함해주세요
-            5. 연관없는 문서는 목록에서 제외해주세요
-            6. 연관없는 문서는 언급하지 말아주세요
-            
+            4. 답변에서 문서를 언급할 때는 실제 파일명을 사용해주세요 (예: "sample.txt에 따르면...")
+            5. 답변 끝에 참조한 문서 목록을 실제 파일명으로 포함해주세요
+            6. 연관없는 문서는 목록에서 제외해주세요
+            7. 연관없는 문서는 언급하지 말아주세요
+
             답변:"""
 
             # EXAONE 로컬 서버에 요청
@@ -80,11 +81,6 @@ class ExaoneService:
                     answer = result['response'].strip()
                 else:
                     answer = str(result)
-
-                # 참조 문서 정보 추가
-                answer += f"\n\n**참조된 문서:**\n"
-                for filename in sorted(referenced_files):
-                    answer += f"• {filename}\n"
 
                 return answer
 
