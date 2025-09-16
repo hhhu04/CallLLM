@@ -17,8 +17,8 @@ COPY . .
 # 빌드 인자 선언
 ARG GEMINI_API_KEY=""
 ARG GEMINI_MODEL_VERSION="gemini-1.5-flash"
-ARG EXAONE_BASE_URL="http://localhost:8080"
-ARG SEARCH_API_BASE_URL="http://localhost:8000"
+ARG EXAONE_BASE_URL="http://localhost:8082"
+ARG SEARCH_API_BASE_URL="http://localhost:8002"
 
 # 환경 변수 설정
 ENV GEMINI_API_KEY=${GEMINI_API_KEY}
@@ -30,4 +30,4 @@ ENV SEARCH_API_BASE_URL=${SEARCH_API_BASE_URL}
 EXPOSE 8001
 
 # 서버 실행
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8001"]

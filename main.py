@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 from client import APIClient
-from llm import GeminiService
+from gemini import GeminiService
 from xaion import ExaoneService
 
 # .env 파일 로드
