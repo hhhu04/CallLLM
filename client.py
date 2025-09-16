@@ -28,15 +28,3 @@ class APIClient:
             return response.json()
 
 
-# Example usage
-async def example_usage():
-    # Create client for external API
-    client = APIClient(base_url="https://api.example.com")
-
-    # GET request
-    result = await client.get("/users", params={"page": 1})
-
-    # POST request
-    result = await client.post("/users", data={"name": "John", "email": "john@example.com"})
-
-    return result

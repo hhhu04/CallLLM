@@ -13,6 +13,7 @@ app = FastAPI()
 
 @app.get("/gemini")
 async def gemini(query: str, index_name:str, path:str):
+    print(os.getenv("SEARCH_API_BASE_URL", "http://localhost:8000"))
     client = APIClient(base_url=os.getenv("SEARCH_API_BASE_URL", "http://localhost:8000"))
     uri = '/search?file_path='+path+'&index_name='+index_name+'&query='+query
 
